@@ -1,0 +1,204 @@
+@import '../abstracts/variables';
+@import '../abstracts/functions';
+
+@mixin typo($color: setShadeColor(dark), $fsz: 1rem, $fw: normal, $lh: 1, $up: false, $cpt: false) {
+    color: setColor($color);
+    font-size: $fsz;
+    font-weight: $fw;
+    line-height: $lh;
+    //Text decoration
+    @if $up {
+        text-transform: uppercase;
+    }
+    @if $cpt {
+        text-transform: capitalize;
+    }
+}
+
+@mixin link($color: setShadeColor(dark), $hvr-color: setShadeColor(green), $fsz: 14px, $fw: normal, $lh: 1, $up: false, $cpt: false, $dashcolor: setColor(green)) {
+    color: setColor($color);
+    font-size: $fsz;
+    font-weight: $fw;
+    text-decoration: none;
+    line-height: $lh;
+    transition: $transition;
+    cursor: pointer;
+    &:hover {
+        color: setColor($hvr-color);
+    }
+    //Text decoration
+    @if $up {
+        text-transform: uppercase;
+    }
+    @if $cpt {
+        text-transform: capitalize;
+    }
+}
+
+@mixin overflowText($line) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $line; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+@mixin spaceTrim {
+    &:first-child {
+        margin-left: 0;
+        padding-left: 0;
+    }
+    &:last-child {
+        margin-right: 0;
+        padding-right: 0;
+    }
+}
+
+@mixin imgCenter($height: 100%, $width: 100%, $type: cover) {
+    height: $height;
+    width: $width;
+    object-fit: $type;
+}
+
+@mixin input($pd: remCal(20), $fsz: remCal(13), $fw: normal, $width: 100%, $height: auto, $lh: $height, $brd: 0px, $bg: #fff, $color: setShadeColor(dark), $ph-color: setShadeColor(medium)) {
+    background-color: $bg;
+    border: 1px solid setShadeColor(light);
+    height: $height;
+    width: $width;
+    transition: $transition;
+    -webkit-appearance: none;
+    padding: $pd;
+    border-radius: $brd;
+    &:focus {
+        outline: 0;
+    }
+    @include typo($color: $color, $fsz: $fsz, $fw: $fw, $lh: $lh);
+
+    @include input-pseudo-class {
+        @include typo($lh: $lh, $fsz: $fsz, $fw: $fw, $color: $ph-color);
+    }
+}
+
+@mixin prefix($property, $value) {
+    @each $prefix in $prefixes {
+        #{'-' + $prefix + '-' + $property}: $value;
+    }
+    #{$property}: $value;
+}
+
+@mixin input-pseudo-class() {
+    @each $prefix in $prefixes {
+        @if $prefix == 'moz' {
+            #{'&:-' + $prefix + '-' + 'input-placeholder'} {
+                @content;
+                line-height: -moz-block-height;
+            }
+            #{'&::-' + $prefix + '-' + 'input-placeholder'} {
+                @content;
+                line-height: -moz-block-height;
+            }
+        } @else {
+            #{'&:-' + $prefix + '-' + 'input-placeholder'} {
+                @content;
+            }
+            #{'&::-' + $prefix + '-' + 'input-placeholder'} {
+                @content;
+            }
+        }
+    }
+    &:input-placeholder {
+        @content;
+    }
+    &::input-placeholder {
+        @content;
+    }
+}
+
+@mixin pseudo-class() {
+    @each $prefix in $prefixes {
+        #{'&::-' + $prefix + '-' + 'placeholder'} {
+            @content;
+        }
+    }
+    &::placeholder {
+        @content;
+    }
+}
+
+@mixin mq($canvas) {
+    @each $name, $bp in $grid-breakpoints {
+        @if $canvas == $name {
+            @media only screen and (max-width: $bp) {
+                @content;
+            }
+        }
+    }
+}
+
+@mixin box-shadow($x-axis: 0, $y-axis: 1px, $blur: 2px, $color: $default) {
+    box-shadow: $x-axis $y-axis $blur $color;
+}
+
+/*
+ * a small mixin for easy use of rem with px as fallback
+ * usage: @include x-rem(font-size, 14px)
+ * usage: @include x-rem(margin, 0 12px 2 1.2)
+ * usage: @include x-rem(padding, 1.5 24px)
+ *
+ */
+ @mixin rem($property, $values) {
+    $base-font-size: 16px; // should be consistent with your html/body font-size
+    $px-values: ();
+    $rem-values: ();
+  
+    // Loop through the $values list
+    @each $value in $values {
+		// For each property value, if it's in rem or px, derive both rem and
+		// px values for it and add those to the end of the appropriate buffer.
+		// Ensure all pixel values are rounded to the nearest pixel.
+		@if $value == 0 or $value == 0px {
+			// 0 -- use it without a unit
+			
+			$px-values: join($px-values, 0);
+			$rem-values: join($rem-values, 0);
+		} @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+			// px value given - calculate rem value from base-font-size
+			$new-rem-value: $value / $base-font-size;
+			$px-values: join($px-values, round($value));
+			$rem-values: join($rem-values, #{$new-rem-value}rem);
+		} @else {
+			// unitless value - use those directly as rem and calculate the px-fallback
+			$px-values: join($px-values, round($value * $base-font-size));
+			$rem-values: join($rem-values, #{$value}rem);
+		}
+    }
+  
+    // output the converted rules
+    #{$property}: $px-values;
+    #{$property}: $rem-values;
+}
+
+@mixin button($bg: setColor(green), $color: setColor(white), $width: 100%, $height: emCal(16, 52), 
+    $radius: emCal(16, 5), $maxWidth: emaCal(16, 230), $fs: emCal(16, 16), $padding: 0) {
+    background-color: $bg;
+    color: $color;
+    width: $width;
+    height: $height;
+    border-radius: $radius;
+    max-width: $maxWidth;
+    font-size: $fs;
+    padding: $padding;
+
+    &:hover,
+    &:focus,
+    &:active{
+        background-color: $bg;
+        color: $color;
+    }
+}
+
+@mixin hidden{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;  
+}

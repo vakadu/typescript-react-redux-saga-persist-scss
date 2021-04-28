@@ -1,15 +1,70 @@
 {
-  "name": "arzooo-web",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "10.1.3",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  }
+	"name": "arzooo.com",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev:staging": "env-cmd -e development next dev",
+		"dev:test1": "env-cmd -e test1 next dev",
+		"dev:test2": "env-cmd -e test2 next dev",
+		"dev:test3": "env-cmd -e test3 next dev",
+		"dev:prod": "env-cmd -e production next dev",
+		"build": "next build",
+		"start": "next start",
+		"type-check": "tsc",
+		"lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
+		"format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
+		"postinstall": "husky install"
+	},
+	"lint-staged": {
+		"./src/**/*.{ts,js,jsx,tsx}": [
+			"yarn lint --fix",
+			"yarn format"
+		]
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"classnames": "^2.2.6",
+		"env-cmd": "^10.1.0",
+		"next": "10.1.3",
+		"next-compose-plugins": "^2.2.1",
+		"next-redux-wrapper": "^6.0.2",
+		"prop-types": "^15.7.2",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"react-redux": "^7.2.2",
+		"redux": "^4.0.5",
+		"redux-devtools-extension": "^2.13.8",
+		"redux-persist": "^6.0.0",
+		"redux-saga": "^1.1.3",
+		"sass": "^1.32.8"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^12.1.1",
+		"@commitlint/config-conventional": "^12.1.1",
+		"@types/node": "^14.14.41",
+		"@types/react": "^17.0.4",
+		"@types/react-dom": "^17.0.3",
+		"@typescript-eslint/eslint-plugin": "^4.22.0",
+		"@typescript-eslint/parser": "^4.22.0",
+		"commitizen": "^4.2.3",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^7.24.0",
+		"eslint-config-airbnb": "^18.2.1",
+		"eslint-config-prettier": "^8.2.0",
+		"eslint-import-resolver-typescript": "^2.4.0",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-prettier": "^3.4.0",
+		"eslint-plugin-react": "^7.23.2",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"husky": "^6.0.0",
+		"lint-staged": "^10.5.4",
+		"prettier": "^2.2.1",
+		"typescript": "^4.2.4"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	}
 }

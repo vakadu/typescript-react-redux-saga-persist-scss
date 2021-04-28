@@ -1,0 +1,23 @@
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+.container {
+    max-width: $container;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: emCal(16, 30);
+    padding-right: emCal(16, 30);
+
+    @include mq(sm) {
+        padding-left: emCal(16, 10);
+        padding-right: emCal(16, 10);
+        overflow: hidden;
+    }
+
+    &__fluid{
+        max-width: $container-fluid;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

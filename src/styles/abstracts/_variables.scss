@@ -1,0 +1,102 @@
+@import './functions';
+
+$rem-baseline: 16;
+$bold: 500;
+$transition: 0.2s ease-in-out;
+$prefixes: (webkit, moz, ms, o);
+
+$primary: #FF6E41;
+$secondary: #000000;
+$white: #FFFFFF;
+$blue: #1591F8;
+$grey_light: rgba(255, 255, 255, 0.2);
+$grey_medium: rgba(255, 255, 255, 0.5);
+$grey_dark: rgba(0, 0, 0, 0.4);
+$transparent: transparent;
+
+$container: 1270px;
+$container-fluid: 1470px;
+
+$colors: (
+    white: $white,
+    black: $secondary,
+    'primary': $primary,
+    'secondary': $secondary,
+    'grey_light': $grey_light,
+    'grey_medium': $grey_medium,
+    'grey_dark': $grey_dark,
+    'transparent': $transparent,
+    'blue': $blue,
+);
+
+$button_colors: (
+    'primary': $primary,
+    'secondary': $secondary,
+    'grey_light': $grey_light,
+    'grey_medium': $grey_medium,
+    'transparent': $transparent,
+    'blue': $blue,
+);
+
+$weights: (
+    'light': 300,
+    'medium': 400,
+    'bold': 500
+);
+
+$sizes: (
+    'smaller': emCal(16, 12),
+    'small': emCal(16, 14),
+    'medium': emCal(16, 16),
+    'large': emCal(16, 18),
+    'larger': emCal(16, 22)
+);
+
+$shades: (
+    dark: #0d0d0d,
+    medium: #888,
+    light: #b7b7b7,
+    border: #eff1f2,
+);
+
+$button_colors: (
+    'primary': $primary,
+    'secondary': $secondary,
+    'grey_light': $grey_light,
+    'grey_medium': $grey_medium,
+    'transparent': $transparent,
+    'blue': $blue
+);
+
+$button_sizes: (
+    'none': emCal(16, 0),
+    'small': emCal(16, 6),
+    'medium': emCal(16, 10) emCal(16, 15),
+    'large': emCal(16, 15) emCal(16, 25),
+);
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: emCal(16, 576),
+    md: emCal(16, 768),
+    lg: emCal(16, 992),
+    xl: emCal(16, 1200),
+    xxl: emCal(16, 1400)
+) !default;
+
+$spacer: 1rem !default;
+$spacers: (
+    0: 0,
+    1: $spacer / 4,
+    2: $spacer / 2,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+) !default;
+
+$gutters: $spacers !default;
+$variable-prefix: arzooo- !default;
+$grid-columns: 12 !default;
+$grid-gutter-width: 1.5rem !default;
+$grid-row-columns: 6 !default;
+$enable-grid-classes: true !default;

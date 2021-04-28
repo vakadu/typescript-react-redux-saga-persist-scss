@@ -1,0 +1,31 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
+
+@each $name,
+$value in $colors {
+    .typography__variant_#{"" + $name}{
+        color: #{$value};
+    }
+}
+
+@each $name,
+$value in $weights {
+    .typography__weight_#{$name}{
+        font-weight: #{$value};
+    }
+}
+
+@each $name,
+$value in $sizes {
+    .typography__size_#{$name}{
+        font-size: #{$value};
+    }
+}
+
+@each $name,
+$value in $colors {
+    .typography__color_#{"" + $name}{
+        color: #{$value};
+    }
+}

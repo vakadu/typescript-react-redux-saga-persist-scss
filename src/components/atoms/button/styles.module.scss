@@ -1,0 +1,46 @@
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+.button__radius{
+    border-radius: emCal(16, 6);
+}
+
+.button__block{
+    width: 100%;
+}
+
+@each $name,
+$value in $button_colors {
+    .button__background__#{"" + $name}{
+        background: #{$value};
+    }
+}
+
+@each $name,
+$value in $weights {
+    .button__weight__#{$name}{
+        font-weight: #{$value};
+    }
+}
+
+@each $name,
+$value in $colors {
+    .button__color__#{"" + $name}{
+        color: #{$value};
+    }
+}
+
+@each $name,
+$value in $sizes {
+    .button__fontsize__#{"" + $name}{
+        font-size: #{$value};
+    }
+}
+
+@each $name,
+$value in $button_sizes {
+    .button__size__#{"" + $name}{
+        padding: #{$value};
+    }
+}
