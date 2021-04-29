@@ -10,6 +10,10 @@
     width: 100%;
 }
 
+.button__disabled{
+    background-color: setColor(grey_dark) !important;
+}
+
 @each $name,
 $value in $button_colors {
     .button__background__#{"" + $name}{

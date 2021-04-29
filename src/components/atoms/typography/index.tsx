@@ -4,10 +4,10 @@ import cn from 'classnames';
 import styles from './styles.module.scss';
 
 interface TypographyProps {
-    variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div' | 'p'
+    variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div' | 'p'
 	color?: 'primary' | 'secondary' | 'white' | 'grey_light' | 'grey_medium' | 'grey_dark' | 'blue'
-	weight: 'light' | 'medium' | 'bold'
-    fontSize: 'smaller' | 'small' | 'medium' | 'large' | 'larger',
+	weight?: 'light' | 'medium' | 'bold'
+    fontSize?: 'smaller' | 'small' | 'medium' | 'large' | 'larger',
 }
 
 const defaultProps: TypographyProps = {

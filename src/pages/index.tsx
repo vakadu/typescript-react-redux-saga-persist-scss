@@ -1,17 +1,16 @@
+import React from 'react';
+
 import Container from '@/atoms/container';
-import Typography from '@/atoms/typography';
+import Layout from '@/molecules/layout';
+import Lazy from '@/atoms/lazy';
 
 export default function Home() {
+
     return (
 		<Container>
-			<Typography
-				variant='h1'
-				color='primary'
-				weight='medium'
-				fontSize='medium'
-			>
-				fdfd
-			</Typography>
+			<Layout>
+
+			</Layout>
 		</Container>
     )
 }

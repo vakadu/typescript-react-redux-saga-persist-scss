@@ -5,18 +5,19 @@ import styles from './styles.module.scss';
 
 interface ButtonProps {
 	color?: 'primary' | 'secondary' | 'white' | 'grey_light' | 'grey_medium'
-	type: 'button' | 'submit'
-	background: 'primary' | 'secondary' | 'white' | 'transparent' | 'grey_medium' | 'blue'
-	weight: 'light' | 'medium' | 'bold'
-    fontSize: 'smaller' | 'small' | 'medium' | 'large' | 'larger'
-    size: 'small' | 'medium' | 'large' | 'none'
-	block: true | false
-	radius: true | false
-	onClick(e: MouseEvent<HTMLElement>): void
+	type?: 'button' | 'submit'
+	background?: 'primary' | 'secondary' | 'white' | 'transparent' | 'grey_medium' | 'blue'
+	weight?: 'light' | 'medium' | 'bold'
+    fontSize?: 'smaller' | 'small' | 'medium' | 'large' | 'larger'
+    size?: 'small' | 'medium' | 'large' | 'none'
+	block?: true | false
+	radius?: true | false
+	disabled?: true | false
+	onClick?(e: MouseEvent<HTMLElement>): void
 };
 
 const defaultProps: ButtonProps = {
-	color: 'primary',
+	color: 'white',
 	background: 'primary',
 	type: 'button',
 	weight: 'medium',
@@ -24,11 +25,12 @@ const defaultProps: ButtonProps = {
 	size: 'medium',
 	block: false,
 	radius: true,
+	disabled: false,
 	onClick: () => {}
 };
 
 const Button: React.FC<ButtonProps> = ({ 
-	color, onClick, type, children, background, weight, fontSize, size, block, radius
+	color, onClick, type, children, background, weight, fontSize, size, block, radius, disabled
 }) => {
 	const [coords, setCoords] = useState({ x: -1, y: -1 });
     const [isRippling, setIsRippling] = useState(false);
@@ -47,6 +49,7 @@ const Button: React.FC<ButtonProps> = ({
 	return (
 		<button
 			type={ type }
+			disabled={ disabled }
 			className={
 				cn({
 					'button': true,
@@ -57,7 +60,8 @@ const Button: React.FC<ButtonProps> = ({
 					[styles[`button__block`]]: block,
                     [styles[`button__weight__${weight}`]]: weight,
                     [styles[`button__color__${color}`]]: color,
-                    [styles[`button__fontsize__${fontSize}`]]: fontSize,
+					[styles[`button__fontsize__${fontSize}`]]: fontSize,
+					[styles[`button__disabled`]]: disabled,
 				})
 			}
 			onClick={ e => {
