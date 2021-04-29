@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Container from '@/atoms/container';
 import Layout from '@/molecules/layout';
-import Lazy from '@/atoms/lazy';
 
 export default function Home() {
 

@@ -1,0 +1,22 @@
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+@import 'abstracts/flex';
+
+.modal{
+    opacity: 0;
+    transform: translateY(-100%);
+
+    &__show{
+        opacity: 1 !important;
+        transform: translateY(0%) !important;
+    }
+
+    &__close{
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: emCal(16, 10);
+        font-size: emCal(16, 30);
+    }
+}
